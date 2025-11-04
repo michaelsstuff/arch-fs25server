@@ -24,7 +24,7 @@ RED='\033[0;31m'
 # Create a clean 64bit Wineprefix
 
 if [ -d ~/.fs25server ]; then
-	rm -r ~/.fs25server && wine wineboot
+	rm -vr ~/.fs25server && wine wineboot
 else
 	wine wineboot
 
@@ -64,6 +64,13 @@ if [ -f /opt/fs25/dlc/FarmingSimulator25_daimlerTruckPack*.exe ]; then
 	echo -e "${GREEN}INFO: Daimler Truck Pack (ESD) SETUP FOUND!${NOCOLOR}"
 else
 	echo -e "${YELLOW}WARNING: Daimler Truck Pack Setup not found, do you own it and does it exist in the dlc mount path?${NOCOLOR}"
+	echo -e "${YELLOW}WARNING: If you do not own it ignore this!${NOCOLOR}"
+fi
+
+if [ -f /opt/fs25/dlc/FarmingSimulator25_highlandsFishingPack_*.exe ] && [ -f /opt/fs25/dlc/FarmingSimulator25_highlandsFishingPack_*.bin ]; then
+	echo -e "${GREEN}INFO: Highlands Fishing Pack SETUP FOUND!${NOCOLOR}"
+else
+	echo -e "${YELLOW}WARNING: Highlands Fishing Pack Setup not found, do you own it and does it exist in the dlc mount path?${NOCOLOR}"
 	echo -e "${YELLOW}WARNING: If you do not own it ignore this!${NOCOLOR}"
 fi
 
@@ -237,6 +244,17 @@ else
 		echo -e "${GREEN}INFO: Installing Daimler Truck Pack (ESD)...!${NOCOLOR}"
 		for i in /opt/fs25/dlc/FarmingSimulator25_daimlerTruckPack*.exe; do wine "$i"; done
 		echo -e "${GREEN}INFO: Daimler Truck Pack is now installed!${NOCOLOR}"
+	fi
+fi
+
+# Highlands Fishing Pack installer
+if [ -f ~/.fs25server/drive_c/users/nobody/Documents/My\ Games/FarmingSimulator2025/pdlc/highlandsFishingPack.dlc ]; then
+	echo -e "${GREEN}INFO: Highlands Fishing Pack is already installed!${NOCOLOR}"
+else
+	if [ -f /opt/fs25/dlc/FarmingSimulator25_highlandsFishingPack_*.exe ] && [ -f /opt/fs25/dlc/FarmingSimulator25_highlandsFishingPack_*.bin ]; then
+		echo -e "${GREEN}INFO: Installing Highlands Fishing Pack...!${NOCOLOR}"
+		for i in /opt/fs25/dlc/FarmingSimulator25_highlandsFishingPack_*.exe; do wine "$i"; done
+		echo -e "${GREEN}INFO: Highlands Fishing Pack is now installed!${NOCOLOR}"
 	fi
 fi
 
